@@ -1,0 +1,22 @@
+def inverter(frase, k):
+    frase_nova = ''
+    frase_nova += frase[k]
+    if len(frase_nova) < len(frase):
+        if k == 0:
+            return frase_nova
+        else:
+            return frase_nova + inverter(frase, k-1)
+
+ent = input()
+lista = []
+for i in ent:
+    if ord(i) < 97:
+            lista.append(chr(ord(i) + 32))
+    else:
+        lista.append(i)
+
+print(inverter(lista, len(lista) -1))
+if (inverter(lista,len(lista)- 1) == 'amigo') or inverter(lista,len(lista) - 1) == 'ogima' or inverter(lista,len(lista) -1) == 'mellon' or inverter(lista,len(lista) -1) == 'nollem':
+      print('Desvendamos o misterio e a porta se abriu!')
+else:
+      print('Acho que ainda nao acertamos, Gandalf, o que faremos agora?')
