@@ -1,0 +1,62 @@
+def magia_vida(x, y):
+    y = int(y)
+    if x == 'Aku-Aku':
+        y *= 2
+    elif x == 'Velo':
+        y *= 1.25
+    else:
+        y *= 1.5
+    
+    return y
+
+def damage(a,b):
+    a = int(a)
+    b = int(b)
+    if a <= 20:
+        b = b**2
+    elif 20 < a <= 30:
+        b *= 2
+    else:
+        pass
+
+    return b
+
+viloes = int(input())
+vitorias = 0
+derrotas = 0
+
+for _ in range(viloes):
+    vida_crash = 0
+
+    mask, vida = input().split()
+    inimigo, dano = input().split()
+
+    coletei = False
+    total_frutas = 0
+
+    while not coletei:
+        frutas = int(input())
+        total_frutas += frutas
+
+        if frutas == 0:
+            coletei = True
+    
+    vida_crash = magia_vida(mask,vida) - damage(total_frutas,dano)
+    if total_frutas < 10:
+        derrotas += 1
+        print(f'Infelizmente o Crash só conseguiu pegar {total_frutas} frutas, então, não é hoje que ele vai derrotar o {inimigo} =(')
+    elif vida_crash > 0:
+        print(f'O nosso herói conseguiu mais uma vez! Pisou no {inimigo}.')
+        vitorias += 1
+    else:
+        derrotas += 1
+        print("Aku-Aku estamos precisando de você!")
+
+
+if viloes == 0:
+    print("Nenhum vilão teve coragem de encarar o Crash hoje!")
+elif vitorias > derrotas:
+    print("O Crash conseguiu livrar as Ilhas Wumpa das mãos dos vilões!!!")
+elif derrotas >= vitorias:
+    print("Não é possível, o Crash não conseguiu vencer?")    
+    
