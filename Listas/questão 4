@@ -1,0 +1,14 @@
+testemunhas = input()
+valores = int(input())
+test_lista = testemunhas.split()
+
+for _ in range(valores):
+    index = int(input())
+    if test_lista[index] == test_lista[len(test_lista )-1 - index]:
+        print('Nenhuma troca foi feita')
+    else:
+        print(f'A testemunha {test_lista[index]} trocou de ordem com a testemunha {test_lista[len(test_lista) -1 -index]}')
+        test_lista[index], test_lista[len(test_lista )-1 - index] = test_lista[len(test_lista) -1 - index], test_lista[index]
+
+result = ' '.join(test_lista)
+print(result)
