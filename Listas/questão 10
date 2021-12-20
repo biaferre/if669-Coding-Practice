@@ -1,0 +1,89 @@
+pre_select = int(input())
+capacidade = int(input())
+n_profissionais = (capacidade/4)
+
+n_pessoas = 0
+n_perfil = []
+n_nome = []
+
+acabou = False
+
+for _ in range(pre_select):
+    if n_pessoas < capacidade:
+        pessoa = input()
+        nome, perfil = pessoa.split(': ')
+        if perfil in ['Cientista', 'Professor(a)', 'Engenheiro(a)', 'Medico(a)']:
+            n_nome.append(nome)
+            if n_perfil.count(perfil) == n_profissionais:
+                pass
+            else:
+                if n_perfil.count(perfil) < n_profissionais:
+                    n_perfil.append(perfil)
+                    n_pessoas += 1
+                    if n_perfil.count(perfil) == n_profissionais:
+                        if perfil == 'Cientista':
+                            perfil += 's'
+                            print(f'Conseguimos chegar a quantidade maxima de {perfil}')
+                        elif perfil == 'Professor(a)':
+                            print('Conseguimos chegar a quantidade maxima de Professores')
+                        elif perfil == 'Medico(a)':
+                            print('Conseguimos chegar a quantidade maxima de Medicos')
+                        elif perfil == 'Engenheiro(a)':
+                            print('Conseguimos chegar a quantidade maxima de Engenheiros')
+                    if n_pessoas == capacidade:
+                        print('Chegamos a nossa capacidade maxima')
+                        acabou = True
+
+
+while not acabou:
+    try:
+        comando = input()
+        if comando == 'buscar':
+            nome_a_buscar = input()
+            if nome_a_buscar in n_nome:
+                print(f'{nome_a_buscar} ja esta no bunker')
+            else:
+                print(f'{nome_a_buscar} ainda não chegou no bunker...')
+        elif comando == 'adicionar':
+            perfil_adicionado = input()
+            nome, perfil = perfil_adicionado.split(': ')
+            if perfil in ['Cientista', 'Professor(a)', 'Engenheiro(a)', 'Medico(a)']:
+                n_nome.append(nome)
+                if n_perfil.count(perfil) == n_profissionais:
+                    pass
+                else:
+                    if n_perfil.count(perfil) < n_profissionais:
+                        n_perfil.append(perfil)
+                        n_pessoas += 1
+                        if n_perfil.count(perfil) == n_profissionais:
+                            if perfil == 'Cientista':
+                                perfil += 's'
+                                print(f'Conseguimos chegar a quantidade maxima de {perfil}')
+                            elif perfil == 'Professor(a)':
+                                print('Conseguimos chegar a quantidade maxima de Professores')
+                            elif perfil == 'Medico(a)':
+                                print('Conseguimos chegar a quantidade maxima de Medicos')
+                            elif perfil == 'Engenheiro(a)':
+                                print('Conseguimos chegar a quantidade maxima de Engenheiros')
+                        if n_pessoas == capacidade:
+                            print('Chegamos a nossa capacidade maxima')
+                            acabou = True
+        else:
+            print('**COMANDO INVALIDO**')
+    except EOFError:
+        acabou = True
+
+n_medicos = n_perfil.count('Medico(a)')
+n_engenheiros = n_perfil.count('Engenheiro(a)')
+n_professores = n_perfil.count('Professor(a)')
+n_cientistas = n_perfil.count('Cientista')
+
+if n_medicos < n_profissionais or n_engenheiros < n_profissionais or n_professores < n_profissionais or n_cientistas < n_profissionais:
+  print('Na nossa busca no banco de dados, nao achamos pessoas suficientes com os parametros de selecao')
+
+print()
+print('Relatorio:')
+print(f'Medicos: {n_medicos}')
+print(f'Engenheiros: {n_engenheiros}')
+print(f'Cientistas: {n_cientistas}')
+print(f'Professores: {n_professores}')
