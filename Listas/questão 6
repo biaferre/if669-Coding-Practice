@@ -1,0 +1,22 @@
+lista = []
+acabou = False
+
+while not acabou:
+    numero = input()
+    if numero != 'fim':
+        lista.append(int(numero))
+    else:
+        acabou = True
+
+n = 0
+
+while n < (len(lista) -1):
+    i = 1
+    while (n + i) <= (len(lista) -1):
+        if lista[n] > lista[n + i]:
+            lista[n], lista[n + i] = lista[n + i], lista[n]
+        i += 1
+    n += 1
+
+for item in lista:
+  print(item)
