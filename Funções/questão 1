@@ -1,0 +1,42 @@
+total_pontos = 0
+
+def avaliar(list):
+    pontos = 0
+    acertei = False
+    pontos += 5*(list.count('X'))
+    if list.count('X') == 5:
+        pontos += 20
+        print('Note streak!')
+    for i in list:
+        if i == 'X':
+            if acertei == True:
+              pontos += 5
+            acertei = True
+        else:
+            acertei = False
+    return pontos
+
+acabou = False
+
+while not acabou:
+    lista = input().split()
+    if lista.count('0') == 5:
+        acabou = True
+    total_pontos += avaliar(lista)
+    
+if total_pontos > 100:
+    print('TEMOS UMA NOVA LENDA DO ROCK!')
+
+elif 70 <= total_pontos <= 100:
+    print('YOU ROCK!!!')
+
+elif 50 <= total_pontos <= 69:
+    print('Wow, rock and roll na veia!')
+
+elif 15 <= total_pontos <= 49:
+    print('Nada bom, amigo...') 
+
+else:
+    print("Song failed!")
+    
+print(f"Sua pontuação foi de {total_pontos} pontos")
