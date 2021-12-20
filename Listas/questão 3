@@ -1,0 +1,33 @@
+nomes = []
+
+while True:
+    try:
+        entrada = input()
+        if entrada == 'adicionar':
+            nome = input()
+            nomes.append(nome)
+            print(f'{nome} foi adicionada ao final da lista')
+        elif entrada == 'remover':
+            nome = input()
+            nomes.remove(nome)
+            print(f'{nome} foi removida da lista')
+        elif entrada == 'atualizar posiçao':
+            nome = input()
+            ind1 = nomes.index(nome)
+            posicao = int(input())
+            nomes.remove(nome)
+            nomes.insert(posicao,nome)
+            if posicao == ind1:
+                print(f'Nada mudou, {nome} ja esta na posiçao certa')
+            else:
+                print(f'{nome} foi inserida na posição {posicao} da lista')
+        else:
+            break
+    except EOFError:
+        break
+
+result = ' '.join(nomes)
+if nomes == []:
+    print("Não sobraram pretendentes para voce, Ted")
+else:
+    print(result)
