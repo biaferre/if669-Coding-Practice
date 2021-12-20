@@ -1,0 +1,36 @@
+def somador_digitos(x):
+    soma = 0
+    for i in str(x):
+        soma += int(i)
+    return soma
+
+numeros = []
+entrada = input().strip('id')
+
+print(f'Analisando ID: {entrada}')
+
+for num in entrada:
+    numeros.append(int(num))
+
+numeros.reverse()
+nova_lista = [] 
+par_ou_impar = 0
+
+for numero in numeros:
+    if (par_ou_impar)%2 != 0:
+        if (numero*2) >= 10:
+            nova_lista.append(somador_digitos(numero*2))
+        else:
+            nova_lista.append(numero*2)
+    else:
+        nova_lista.append(numero)
+    par_ou_impar += 1
+
+soma_final = 0
+for n in nova_lista:
+    soma_final += n
+
+if soma_final%10 == 0:
+    print("Situacao: Jogador limpo")
+else:
+    print("Situacao: XITADO ATE OS DENTES")
