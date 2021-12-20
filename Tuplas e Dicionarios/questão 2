@@ -1,0 +1,82 @@
+K = int(input())
+catalogo = {}
+
+def pesquisar_vilao(d, v):
+    if v in d.keys(): 
+        return f'Os atributos do {v} foram:\nataque: {d[v]["ataque"]}\ndefesa: {d[v]["defesa"]}\nvida: {d[v]["vida"]}'
+    else: 
+        return 'Peter, foca nos viloes que tao ai agora! se liga, boy'
+
+def pesquisar_atributo(d,a,v):
+    if v not in d.keys():
+        return 'Peter, foca nos viloes que tao ai agora! se liga, boy'
+    else:
+        if a != 'ataque' and a != 'defesa' and a != 'vida':
+            return 'Ta viajando, peter? nao existe esse atributo'
+        else:
+            if a == 'ataque':
+                result = f'O(a) {a} do {v} e: {d[v]["ataque"]}'
+                if d[v][a] >= 15:
+                    return result + f'\n{v} vai destruir a cidade, chama o Dr. estranho!'
+                else:
+                    return result
+            elif a == 'defesa':
+                result = f'O(a) {a} do {v} e: {d[v]["defesa"]}'
+                if d[v][a] >= 15:
+                    return result + f'\ncara, voce nao vai conseguir machuca-lo, {v} e uma muralha!'
+                elif d[v][a] <= 5:
+                    return result + f'\nVa agora! {v} nao se defende bem'
+                else:
+                    return result
+            else:
+                result = f'O(a) {a} do {v} e: {d[v]["vida"]}'
+                if d[v][a] <= 5:
+                    return result + f'\n{v} esta enfraquecido! va para cima dele, peter!!'
+                elif d[v][a] >= 15:
+                    return result + f'\nNao foque em {v} ainda! ele esta muito bem'
+                else:
+                    return result
+
+def comparar_viloes(d,a,v1,v2):
+    if v1 not in d.keys() or v2 not in d.keys():
+        return 'Peter, foca nos viloes que tao ai agora! se liga, boy'
+    else:
+        if a == 'ataque':
+            n = 'ataque'
+        elif a == 'defesa':
+            n = 'defesa'
+        else:
+            n = 'vida'
+        if d[v1][n] < d[v2][n]:
+            return f'Aqui esta a comparacao, peter!\n{v1}: {d[v1][n]} X {v2}: {d[v2][n]}\nO vilao com menos {a} e o {v1}, pra cima dele!'
+        else:
+            return f'Aqui esta a comparacao, peter!\n{v1}: {d[v1][n]} X {v2}: {d[v2][n]}\nO vilao com menos {a} e o {v2}, pra cima dele!'
+
+
+for _ in range(K):
+    info_vilao = {}
+    nome = input()
+    entry = input().split(' - ')
+
+  
+    info_vilao['ataque'] = int(entry[0].split(', ')[1])
+    info_vilao['defesa'] = int(entry[1].split(', ')[1])
+    info_vilao['vida'] = int(entry[2].split(', ')[1])
+    catalogo[nome] = info_vilao
+
+M = int(input())
+
+for _ in range(M):
+    acao = input()
+    if acao == 'pesquisar vilao':
+        vilao = input()
+        print(pesquisar_vilao(catalogo, vilao))
+    elif acao == 'pesquisar atributo':
+        vilao = input()
+        atributo = input()
+        print(pesquisar_atributo(catalogo, atributo, vilao))
+    else:
+        vilao1 = input()
+        vilao2 = input()
+        atributo = input()
+        print(comparar_viloes(catalogo,atributo,vilao1,vilao2))
