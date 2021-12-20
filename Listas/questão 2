@@ -1,0 +1,22 @@
+sobrenaturais = ['Damon Salvatore', 'Stefan Salvatore', 'Caroline Forbes', 'Elena Gilbert', 'Bonnie Bennett', 'Kai Parker','Katherine Pierce']
+encontrados = []
+
+while True:
+  try:
+    cidadao = input()
+    if cidadao in sobrenaturais:
+        encontrados.append(cidadao)
+  except EOFError:
+    break
+
+if encontrados == []:
+    print('Nenhum sobrenatural foi encontrado :/')
+else:
+    print('Os sobrenaturais encontrados foram:')
+    print()
+    for nome in encontrados:
+      while encontrados.count(nome) > 1:
+        encontrados.remove(nome)
+      print(nome)
+    print()
+    print('Agora Klaus, Rebekah, Elijah, Kol e toda a família original sabem bem em quem podem confiar e quem devem matar.')
