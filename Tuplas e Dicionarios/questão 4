@@ -1,0 +1,49 @@
+nomes = []
+atividades = []
+agenda = {}
+acabou = False
+
+while not acabou:
+    try:
+        info = input()
+    
+        lista = info.split()
+        nome = lista[0]
+        lista.remove(nome)
+        
+        if nome in agenda.keys():
+            ativ = ' '.join(lista)
+            atividades.append(ativ)
+            agenda[nome].append(ativ)
+        else:
+            nomes.append(nome)
+            ativ = ' '.join(lista)
+            atividades.append(ativ)
+            agenda[nome] = []
+            agenda[nome].append(ativ)
+        
+    except EOFError:
+        acabou = True
+
+def criar_lista(n,l):
+    """ cria a listinha com os itens a serem printados """
+    result = f'{n}:'
+    for i in l:
+        result += f'\n- {i}'
+    return result
+
+def tirar_repet(l):
+    lista = list(dict.fromkeys(l))
+    return lista
+
+atividades = tirar_repet(atividades)
+nomes = tirar_repet(nomes)
+
+
+for nome in agenda.keys():
+    falta = []
+    for atividade in atividades:
+        if atividade not in tirar_repet(agenda[nome]):
+            falta.append(atividade)
+    
+    print(criar_lista(nome,tirar_repet(falta)))
