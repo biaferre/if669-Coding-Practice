@@ -1,0 +1,25 @@
+mensagem = []
+
+letras = input().split()
+acoes = input().split()
+pos_inicial = input()
+
+index1 = letras.index(pos_inicial)
+
+for acao in acoes:
+    if acao != 'R' and acao != '/':
+        index1 += int(acao)
+        mensagem.append(letras[(index1)%26])
+    elif acao == 'R':
+        if acoes.index('R') == 0:
+            mensagem.append(letras[index1])
+        else:
+            if mensagem[-1] == ' ':
+              mensagem.append(mensagem[-2])
+            else:
+              mensagem.append(mensagem[-1])
+    else:
+        mensagem.append(' ')
+
+result = ''.join(mensagem)
+print(result)
