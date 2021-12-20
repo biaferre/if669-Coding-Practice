@@ -1,0 +1,81 @@
+toolkit = {'Batrangue': 270, 'Bat-Minas': 255, 'Tasers': 185, 'Soqueiras': 150, 'Granada Sonica': 300, 'Gel Explosivo': 400, 'Faca Tatica': 345}
+result = {'Mortos:': 0, 'Fugas:': 0, 'Incapacitados:': 0}
+battles = int(input())
+
+def damage(t, l, i):
+    ''' funçao pra calcular o dano causado com base na arma(t), vida atual do vilao(l) e vida inicial do vilao (i)'''
+    if t == 'Batrangue':
+        if l > 0.4*i:
+            return 270
+        else:
+            return 0.25*270
+    elif t == 'Bat-Minas':
+        if l > 0.4*i:
+            return 255
+        else:
+            return 0.25*255
+    elif t == 'Tasers':
+        if l > 0.4*i:
+            return 185
+        else:
+            return 0.5*185
+    elif t == 'Soqueiras':
+        if l > 0.4*i:
+            return 150
+        else:
+            return 150*0.5
+    elif t == 'Granada Sonica':
+        if l > 0.4*i:
+            return 300
+        else:
+            return 300*0.15
+    elif t == 'Gel Explosivo':
+        if l > 0.4*i:
+            return 400
+        else:
+            return 400*0.15
+    else:
+        if l > 0.4*i:
+            return 345
+        else:
+            return 345*0.15
+
+for _ in range(battles):
+    n_tools = int(input())
+    initial_hp = int(input())
+    final_hp = initial_hp
+    tools_used = []
+
+    for _ in range(n_tools):
+        tool = input()
+        if tool not in toolkit.keys():
+            print(f'{tool}? Infelizmente esta ferramenta não está disponível.')
+        else:
+            tools_used.append(tool)
+            final_hp -= damage(tool, final_hp, initial_hp)
+
+    
+    if final_hp <= 0:
+        result['Mortos:'] += 1
+    elif final_hp > 0.15*initial_hp:
+        result['Fugas:'] += 1
+    else:
+        result['Incapacitados:'] += 1
+
+for key in result.keys():
+    print(f'{key} {result[key]}')
+n_fails = result['Mortos:'] + result['Fugas:']
+n_wins = result['Incapacitados:']
+
+if n_wins > n_fails:
+    if n_fails > 0:
+        print("Batman conseguiu capturar a maioria dos criminosos, nosso herói está no caminho certo.")
+    else:
+        print("Batman conseguiu capturar todos os criminosos e garantiu uma noite segura em Gotham City.")
+elif n_fails > n_wins:
+    if n_wins > 0:
+        print("Muitas missões fracassadas.. Pelo visto, o nosso herói precisa treinar mais.")
+    else:
+        print("Muitas missões fracassadas... Tem certeza de que o seu programa passou as ferramentas corretas?")
+else:
+    print("Uma noite caótica em Gotham City, talvez o nosso herói precise mudar as ferramentas...")
