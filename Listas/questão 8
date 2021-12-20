@@ -1,0 +1,51 @@
+presentes = int(input())
+
+total_votantes = []
+total_votados = []
+
+for _ in range(presentes):
+  voto = input()
+  votantes, votados = voto.split(': ')
+  total_votantes.append(votantes)
+  total_votados.append(votados)
+
+n_votos_shelby = 0
+shelbys_votados = []
+
+vencedor = ''
+vice = ''
+votos_vencedor = 0
+votos_vice = 0
+
+for nome in total_votados:
+    if nome in total_votantes:
+        if ('Shelby' in nome) and (nome not in shelbys_votados):
+            n_votos_shelby += 1
+            shelbys_votados.append(nome)
+            if total_votados.count(nome) > votos_vencedor:
+                vice = vencedor
+                votos_vice = votos_vencedor
+                vencedor = nome
+                votos_vencedor = total_votados.count(nome)
+            elif total_votados.count(nome) == votos_vencedor or total_votados.count(nome) > votos_vice:
+                vice = nome
+                votos_vice = total_votados.count(nome)
+
+percentual1 = (votos_vencedor*100)/presentes
+percentual2 = (votos_vice*100)/presentes
+
+revolta = 'Algo histórico aconteceu aqui hoje, é uma revolta contra os Shelby!'
+if n_votos_shelby == 0:
+    print(revolta)
+elif n_votos_shelby == 1 and total_votados.count(shelbys_votados[0]) <= (presentes/2):
+    print(revolta)
+else:
+    if vencedor == 'Thomas Shelby' and percentual1 > 50:
+        print(f'Thomas Shelby ganhou a eleição com {percentual1:.2f}% dos votos e continuara sendo o líder dos Peaky Blinders!!!')
+    elif 'Thomas' in vencedor or 'Thomas' in vice and percentual1 <= 50:
+        print(f'Precisaremos ter uma segunda rodada entre os membros {vencedor} e {vice}, que tiveram respectivamente {percentual1:.2f}% e {percentual2:.2f}% dos votos, Tommy ainda está na disputa.')
+    elif 'Thomas' not in vencedor or 'Thomas' not in vice:
+        if percentual1 > 50:
+            print(f'Assumindo o lugar de Tommy, {vencedor} agora é o novo líder da gangue vencendo a eleição com {percentual1:.2f}% dos votos!')
+        else:
+            print(f'Precisaremos ter uma segunda rodada entre os membros {vencedor} e {vice}, que tiveram respectivamente {percentual1:.2f}% e {percentual2:.2f}% dos votos, teremos um novo líder!')
