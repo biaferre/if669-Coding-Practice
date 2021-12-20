@@ -1,0 +1,27 @@
+# function that verifies if two dictionaries have the same elements (anagrams)
+def anagrama_check(d1,d2):
+    if d1 == d2:
+        return True
+    else:
+        return False
+
+# receive an attempted password and the key password in strings, casefolded
+chave = input().casefold()
+senha = input().casefold()
+
+# create one dictionary for the attempt and one for the key
+dict_chave = {}
+dict_senha = {}
+
+# iterate through letters in the strings received and update them to their respective dictionaries
+for char in chave:
+    dict_chave.update({f'{char}':f'{char}'})
+
+for char in senha:
+    dict_senha.update({f'{char}':f'{char}'})
+   
+# check if the attempted password and the key password are anagrams
+if anagrama_check(dict_chave,dict_senha):
+    print('Acesso liberado. Bem vindo Senhor Stark.')
+else:
+    print('Acesso negado.')
