@@ -1,0 +1,224 @@
+# recebo o numero de casos a analisar
+casos_totais = int(input())
+
+# preparo as variaveis de nome, tipo de caso e pontos do caso
+nome = ''
+tipo = ''
+pontos = ''
+
+# agora vou iniciar as variaveis numericas que vou usar
+maximo_mike = 0
+maximo_louis = 0
+maximo_harvey = 0
+
+total_pontos_mike = 0
+total_pontos_louis = 0
+total_pontos_harvey = 0
+
+total_casos_mike = 0
+total_casos_louis = 0
+total_casos_harvey = 0
+
+probono_mike = 0
+probono_louis = 0
+probono_harvey = 0
+
+# recebo as inputs dos casos e divido elas em nome, tipo e pontos
+for _ in range(casos_totais):
+    info = input().split()
+    nome = info[0]
+    tipo = info[1]
+    pontos = int(info[2])
+
+    # pra cada nome, guardo quantos pontos ela fez, quantos casos teve, quantos pro-bonos e qual o maximo de pontos
+    if nome == 'Mike':
+        total_pontos_mike += pontos
+        total_casos_mike += 1
+        if tipo == 'pro-bono':
+            probono_mike += 1
+        if pontos > maximo_mike:
+            maximo_mike = pontos
+    elif nome == 'Louis':
+        total_pontos_louis += pontos
+        total_casos_louis += 1
+        if tipo == 'pro-bono':
+            probono_louis += 1
+        if pontos > maximo_louis:
+            maximo_louis = pontos
+    else:
+        total_pontos_harvey += pontos
+        total_casos_harvey += 1
+        if tipo == 'pro-bono':
+            probono_harvey += 1
+        if pontos > maximo_harvey:
+            maximo_harvey = pontos
+
+# agora vou criar listas de pontuacao, maximo e probonos que armazenam as medias, maximos e probonos, respectivamente
+pontuacao = []
+
+media_mike = total_pontos_mike/total_casos_mike
+media_louis = total_pontos_louis/total_casos_louis
+media_harvey = total_pontos_harvey/total_casos_harvey
+
+pontuacao.append(media_mike)
+pontuacao.append(media_louis)
+pontuacao.append(media_harvey)
+
+maximos = []
+probonos = []
+
+maximos.append(maximo_mike)
+maximos.append(maximo_louis)
+maximos.append(maximo_harvey)
+
+probonos.append(probono_mike)
+probonos.append(probono_louis)
+probonos.append(probono_harvey)
+
+# ordeno as informacoes dentro das listas usando while
+pontuacao.sort(reverse= True)
+
+#printo as informaçoes basicas de cada advogado
+print(f'Mike;\nMédia: {media_mike:.2f}\nQuantidade de Pró-bonos: {probono_mike}\nMáximo: {maximo_mike}')
+print()
+print(f'Louis;\nMédia: {media_louis:.2f}\nQuantidade de Pró-bonos: {probono_louis}\nMáximo: {maximo_louis}')
+print()
+print(f'Harvey;\nMédia: {media_harvey:.2f}\nQuantidade de Pró-bonos: {probono_harvey}\nMáximo: {maximo_harvey}')
+print()
+
+# agora, quero descobrir quem ficou em primeiro e quem ficou em ultimo
+vencedor = ''
+perdedor = ''
+
+if media_harvey != media_mike and media_harvey != media_louis and media_louis != media_mike:
+    if media_mike == pontuacao[0]:
+        vencedor = 'Mike'
+    elif media_louis == pontuacao[0]:
+        vencedor = 'Louis'
+    elif media_harvey == pontuacao[0]:
+        vencedor = 'Harvey'
+
+    if media_mike == pontuacao[2]:
+        perdedor = 'Mike'
+    elif media_louis == pontuacao[2]:
+        perdedor = 'Louis'
+    elif media_harvey == pontuacao[2]:
+        perdedor = 'Harvey'
+elif media_harvey == media_mike and media_harvey != media_louis:
+    if media_mike > media_louis:
+        perdedor = 'Louis'
+        if probono_harvey > probono_mike:
+            vencedor = 'Harvey'
+        elif probono_harvey < probono_mike:
+            vencedor = 'Mike'
+        else:
+            if maximo_harvey <= maximo_mike:
+                vencedor = 'Mike'
+            else:
+                vencedor = 'Harvey'
+    elif media_mike < media_louis:
+        vencedor = 'Louis'
+        if probono_mike < probono_harvey:
+            perdedor = 'Mike'
+        elif probono_mike > probono_harvey:
+            perdedor = 'Harvey'
+        else:
+            if maximo_harvey <= maximo_mike:
+                perdedor = 'Harvey'
+            else:
+                perdedor = 'Mike'
+elif media_louis == media_harvey and media_harvey != media_mike:
+    if media_mike < media_louis:
+        perdedor = 'Mike'
+        if probono_harvey > probono_louis:
+            vencedor = 'Harvey'
+        elif probono_harvey < probono_louis:
+            vencedor = 'Louis'
+        else:
+            if maximo_harvey <= maximo_louis:
+                vencedor = 'Louis'
+            else:
+                vencedor = 'Harvey'
+    elif media_mike > media_louis:
+        vencedor = 'Mike'
+        if probono_louis < probono_harvey:
+            perdedor = 'Louis'
+        elif probono_louis > probono_harvey:
+            perdedor = 'Harvey'
+        else:
+            if maximo_harvey <= maximo_louis:
+                perdedor = 'Harvey'
+            else:
+                perdedor = 'Louis'
+elif media_louis == media_mike and media_harvey != media_mike:
+    if media_harvey < media_louis:
+        perdedor = 'Harvey'
+        if probono_mike > probono_louis:
+            vencedor = 'Mike'
+        elif probono_mike < probono_louis:
+            vencedor = 'Louis'
+        else:
+            if maximo_louis <= maximo_mike:
+                vencedor = 'Mike'
+            else:
+                vencedor = 'Louis'
+    elif media_harvey > media_louis:
+        vencedor = 'Harvey'
+        if probono_louis < probono_mike:
+            perdedor = 'Louis'
+        elif probono_louis > probono_mike:
+            perdedor = 'Mike'
+        else:
+            if maximo_louis <= maximo_mike:
+                perdedor = 'Louis'
+            else:
+                perdedor = 'Mike'
+else:
+    if media_mike == media_harvey and media_mike == media_louis:
+        if probono_mike == probono_harvey and probono_mike == probono_louis:
+            if maximo_mike == maximo_harvey and maximo_mike == maximo_louis:
+                vencedor = 'Mike'
+                perdedor = 'Harvey'
+            else:
+                if maximo_mike > maximo_harvey:
+                    if maximo_mike > maximo_louis:
+                        vencedor = 'Mike'
+                        if maximo_harvey > maximo_louis:
+                            perdedor = 'Louis'
+                        else:
+                            perdedor = 'Harvey'
+                    else:
+                        vencedor = 'Louis'
+                        perdedor = 'Harvey'
+                else:
+                    if maximo_harvey > maximo_louis:
+                        vencedor = 'Louis'
+                        if maximo_louis > maximo_mike:
+                            perdedor = 'Mike'
+                        else:
+                            perdedor = 'Louis'
+                    vencedor = 'Louis'
+                    perdedor = 'Mike'
+        else:
+            if probono_mike > probono_louis:
+                if probono_mike > probono_harvey:
+                    vencedor = 'Mike'
+                    if probono_harvey > probono_louis:
+                        perdedor = 'Louis'
+                    else:
+                        perdedor = 'Harvey'
+                else:
+                    vencedor = 'Harvey'
+                    perdedor = 'Louis'
+            else:
+                if probono_louis > probono_harvey:
+                    vencedor = 'Louis'
+                    if probono_harvey > probono_mike:
+                        perdedor = 'Mike'
+                    else:
+                        perdedor = 'Harvey'
+                else:
+                    vencedor = 'Harvey'
+                    perdedor = 'Mike'
+
+print(f'Quem ganhou a competição e vai ficar com a sala nova foi o {vencedor}!!! E o coitado que vai ter que comprar os móveis vai ser o {perdedor}.')
