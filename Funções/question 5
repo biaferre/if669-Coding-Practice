@@ -1,0 +1,39 @@
+alfabeto = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+
+
+def fibonacci(x):
+    el1 = 1
+    el2 = 1
+    if x == 1 or x == 2:
+        resultado = 1
+    else:
+        for _ in range(x - 3):
+            resultado = el1 + el2
+
+            el2 = el1
+            el1 = resultado
+    return resultado
+
+def criptografe(f, c):
+    nova_frase = []
+    x = 1
+
+    for letra in f:
+        n = alfabeto.index(letra) + fibonacci(c + x)
+        if n > 25:
+            n = (alfabeto.index(letra) + fibonacci(c+x))%26
+        
+        nova_letra = alfabeto[n]
+
+        nova_frase.append(nova_letra)
+        x += 1
+    
+    result = ''.join(nova_frase)
+    return result
+
+n_frases = int(input())
+for _ in range(n_frases):
+    chave = int(input())
+    frase = input().replace(' ', '')
+
+    print(criptografe(frase,chave))
