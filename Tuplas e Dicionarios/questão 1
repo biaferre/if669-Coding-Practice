@@ -1,0 +1,40 @@
+def can_flash_win(n):
+    if n > 15:
+        return 'Flash cansou de correr'
+    else:
+        return 'A velocidade cuida dos nossos problemas'
+
+def can_batman_win(n):
+    if n > 25:
+        return 'Volte para a batcaverna'
+    else:
+        return 'Morcego rei da noite'
+
+def can_aquaman_win(n):
+    if n > 20:
+        return 'Sushi de heroi'
+    else:
+        return 'O tridente brandiu'
+
+def can_ww_win(n):
+    if n > 50:
+        return 'Volte para casa princesa Diana'
+    else:
+        return 'O laco da verdade vai estralar'
+
+heroes_list = {}
+entries = int(input())
+
+for _ in range(entries):
+    entry = input().split()
+    h = entry[0]
+    n = int(entry[1])
+    if h == 'flash':
+        heroes_list['flash'] = can_flash_win
+    elif h == 'batman':
+        heroes_list['batman'] = can_batman_win
+    elif h == 'aquaman':
+        heroes_list['aquaman'] = can_aquaman_win
+    else:
+        heroes_list['maravilha'] = can_ww_win
+    print(heroes_list[h](n))
