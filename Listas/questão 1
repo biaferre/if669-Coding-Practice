@@ -1,0 +1,32 @@
+lista = []
+
+nome1 = ''
+nome2 = ''
+nome3 = ''
+nome4 = ''
+nome5 = ''
+
+for _ in range(5):
+    entrada = input()
+    x = entrada.split(' - ')
+    lista = x 
+    posicao = int(lista[1])
+    nome = lista[0]
+    if posicao == 1:
+        nome1 = nome
+    elif posicao == 2:
+        nome2 = nome
+    elif posicao == 3:
+        nome3 = nome
+    elif posicao ==4:
+        nome4 = nome
+    else:
+        nome5 = nome
+
+print('Velocista - Posicao')
+print()
+print(f'{nome1} - 1')
+print(f'{nome2} - 2')
+print(f'{nome3} - 3')
+print(f'{nome4} - 4')
+print(f'{nome5} - 5')
