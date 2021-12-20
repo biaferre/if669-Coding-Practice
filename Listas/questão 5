@@ -1,0 +1,46 @@
+# bia, tenta fazer com join !!
+
+boletim = []
+lista_crimes = []
+lista_criminosos = []
+while True:
+    info = input()
+    if 'Doug Judy' not in info:
+      boletim.append(info)
+    else:
+      break
+
+assassinos = 'Assassinos: '
+ladroes = 'Ladroes: '
+list_assassinos = []
+list_ladroes = []
+
+for element in boletim:
+    acao = element.split(': ')
+    lista_crimes.append(acao[0])
+    lista_criminosos.append(acao[1])
+    o_que_fez = acao[0]
+    quem_fez = acao[1]
+    if quem_fez != 'Doug Judy':
+        if o_que_fez == 'Assassinato' and quem_fez not in list_assassinos:
+            list_assassinos.append(quem_fez)
+        elif o_que_fez == 'Furto' or o_que_fez == 'Roubo' and quem_fez not in ladroes:
+            list_ladroes.append(quem_fez)
+
+assassinos += ', '.join(list_assassinos)
+ladroes += ', '.join(list_ladroes)
+
+operacoes = int(input())
+
+for _ in range(operacoes):
+    op = int(input())
+    if op == 1:
+        criminoso = input()
+        print(f'Na ficha de {criminoso} constam {lista_criminosos.count(criminoso)} infrações este mês.')
+    elif op ==2:
+        crime = input()
+        print(f'Neste mês foram cometidos {lista_crimes.count(crime)} {crime}')
+    else:
+        print('Boletim de Ocorrências:')
+        print(assassinos)
+        print(ladroes)
