@@ -1,0 +1,83 @@
+# primeiro, crio a funçao somador de digitos que vai ser usada pro 
+# jogo aquagrabber
+
+def somador_digitos(x):
+    soma = 0
+    for i in str(x):
+        soma += int(float(i))
+    return soma
+
+# agora, crio a funçao que vai calcular as moedas ganhas e o tempo gasto no jogo
+# pra cada tipo de jogo
+
+def premio_calculator(jogo):
+  # inicializo algumas variaveis intra-funçao
+    result = []
+    moedas_ganhas = 0
+    tempo_gasto = 0
+    # essa variavel k vai me ajudar a alterar o valor de moedas totais 
+    # sem dar unboundlocalerror pro calculo do jogo de dança
+    k = moedas_totais
+
+    if jogo =='Surfe':
+        moedas_ganhas = int((tmp_gasto_total + moedas_totais)/2)
+        tempo_gasto += 20
+
+    elif jogo == 'Danca':
+        tempo_gasto += 15
+        if k%10 == 0 and k != 0:
+            moedas_ganhas = 5
+        elif k == 0:
+            moedas_ganhas = 10
+        else:
+            while k%10 != 0:
+              moedas_ganhas += 1
+              k += 1
+
+    elif jogo == 'Pescaria':
+        tempo_gasto += 30
+        if moedas_totais%2 == 0:
+            moedas_ganhas = (moedas_totais%7)*6
+        else:
+            moedas_ganhas = (moedas_totais%7)**2
+
+    else:
+        moedas_ganhas = somador_digitos(moedas_totais)
+        tempo_gasto = 50
+    
+    # no fim, quero retornar uma lista com moedas que obtive e o tempo que gastei
+    result.append(moedas_ganhas)
+    result.append(tempo_gasto)
+    return result
+
+# agora inicializo variaveis uteis pra os outputs
+tmp_gasto_total = 0
+moedas_totais = 10
+jogos_participados = 0
+
+# só vou jogar enquanto nao tiver estourado o tempo limite
+while tmp_gasto_total < 120:
+    try:
+
+        jogo = input()
+        jogos_participados += 1
+       
+        # acrescento as moedas que ganhei no jogo às que ja tinha
+        moedas_totais += premio_calculator(jogo)[0]
+        # acrescento o tempo gasto nesse jogo ao tempo gasto total
+        tmp_gasto_total += premio_calculator(jogo)[1]
+       
+        if jogo == 'Surfe':
+            print(f"O pinguim acabou de concluir o jogo Surfe na Caçamba e agora possui {moedas_totais} moedas.")
+        elif jogo == 'Danca':
+            print(f"O pinguim acabou de concluir o jogo Concurso de Dança e agora possui {moedas_totais} moedas.")
+        elif jogo == 'Pescaria':
+            print(f"O pinguim acabou de concluir o jogo Pescaria no Gelo e agora possui {moedas_totais} moedas.")
+        else:
+            print(f"O pinguim acabou de concluir o jogo Aquagrabber e agora possui {moedas_totais} moedas.")
+
+    except EOFError:
+         pass
+   
+print()
+print(f"Parabens! Você terminou o Circuito Pinguim, participando de {jogos_participados} jogos e acumulando a quantia de {moedas_totais} moedas.")
